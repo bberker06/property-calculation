@@ -3,29 +3,29 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # This triggers the workflow whenever you push to the 'main' branch
+      - main  # This triggers the workflow when you push to the 'main' branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Specifies the OS for the job
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Checkout the code from the repository
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Specify the Node.js version (adjust as needed)
+          node-version: '14'
 
       - name: Install dependencies
-        run: npm install  # Install dependencies defined in package.json
+        run: npm install
 
       - name: Build the project
-        run: npm run build  # Run your build script if you have one
+        run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3  # GitHub Action for deployment
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub Token for authentication
-          publish_dir: ./public  # The directory with your built files (adjust as needed)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public  # Ensure this points to the folder with your built files
