@@ -6,17 +6,23 @@ document.getElementById("find-borough-btn").addEventListener("click", function()
         return;
     }
 
-    var apiKey = "YOUR_API_KEY";  // Replace with your OpenCage API key
-    var url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}&key=${apiKey}`;
+    // Replace with Nominatim API URL
+    var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&addressdetails=1`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            if (data.results && data.results.length > 0) {
+            if (data && data.length > 0) {
                 var borough = null;
 
                 // Loop through the results to find the borough
-                data.results[0].components.county ? borough = data.results[0].components.county : borough = "Not Found";
+                if (data[0].address && data[0].address.city_district) {
+                    borough = data[0].address.city_district;  // Example for borough
+                } else if (data[0].address && data[0].address.county) {
+                    borough = data[0].address.county;
+                } else {
+                    borough = "Borough not found";
+                }
 
                 document.getElementById("borough").value = borough;
             } else {
@@ -27,27 +33,4 @@ document.getElementById("find-borough-btn").addEventListener("click", function()
             console.error("Error fetching borough data:", error);
             alert("Failed to fetch borough information. Please try again.");
         });
-});
-
-document.getElementById("submit-btn").addEventListener("click", function() {
-    var address = document.getElementById("property-address").value;
-    var borough = document.getElementById("borough").value;
-    var purchasePrice = document.getElementById("purchase-price").value;
-
-    if (!address || !borough || !purchasePrice) {
-        alert("Please fill in all fields!");
-        return;
-    }
-
-    // This is where the calculation logic will go.
-    // For now, we'll just use placeholder data.
-    var calculatedRent = (purchasePrice * 0.05).toFixed(2); // Example calculation
-
-    // Show the summary
-    document.getElementById("summary-address").innerText = address;
-    document.getElementById("summary-borough").innerText = borough;
-    document.getElementById("summary-price").innerText = purchasePrice;
-    document.getElementById("summary-rent").innerText = calculatedRent;
-
-    document.getElementById("summary").style.display = "block";
 });
