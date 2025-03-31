@@ -1,0 +1,13 @@
+{
+  "name": "property-calculation",
+  "version": "1.0.0",
+  "description": "A property calculation website",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo \"No build process defined yet\""
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "author": "Your Name",
+  "license": "ISC"
+}
