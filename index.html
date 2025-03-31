@@ -11,8 +11,7 @@
 
     <div class="form-container">
         <label for="property-address">Property Address:</label>
-        <input type="text" id="property-address" placeholder="Enter address or postcode">
-        <button id="find-borough-btn">Find Borough</button>
+        <input type="text" id="property-address" placeholder="Enter address or postcode" autocomplete="off">
 
         <label for="borough">Borough:</label>
         <input type="text" id="borough" readonly>
@@ -29,10 +28,8 @@
         <p><strong>Borough:</strong> <span id="summary-borough"></span></p>
         <p><strong>Purchase Price:</strong> £<span id="summary-price"></span></p>
         <p><strong>Calculated Rent:</strong> £<span id="summary-rent"></span></p>
-        <!-- Add other calculated fields as needed -->
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
